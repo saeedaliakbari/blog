@@ -17,8 +17,9 @@ $posts_slider=$db->query($query_slider);
                     $query_posts="SELECT * FROM `posts` WHERE id=$id_post";
                     $post=$db->query($query_posts)->fetch();
             ?>
+
             <div class="carousel-item <?php echo ($post_slider['active'])?"active":"" ?>" style="height: 450px">
-                <img src="/img/1.jpg" class="img-fluid d-block w-100 h-100" alt="<?php echo $post['title']?>">
+                <img src="../upload/posts/".<?php echo $post['image'] ?> class="img-fluid d-block w-100 h-100" alt="<?php echo $post['title']?>">
                 <div class="carousel-caption d-none d-md-block">
                     <h5><?php echo $post['title']?></h5>
                     <p><?php echo substr($post['body'],0,200)."..." ?></p>

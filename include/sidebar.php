@@ -1,3 +1,8 @@
+<?php
+$query_categories="SELECT * FROM `categories`";
+$categories=$db->query($query_categories);
+?>
+
 <div class="col-md-4 mb-3">
 
     <div class="card bg-light mb-3">
@@ -21,18 +26,36 @@
         <a href="#" class="list-group-item list-group-item-action active">
             دسته بندی ها
         </a>
-        <a href="" class="list-group-item list-group-item-action">دسته 1</a>
-        <a href="" class="list-group-item list-group-item-action">دسته 2</a>
-        <a href="" class="list-group-item list-group-item-action">دسته 3</a>
-        
+        <?php
+            if($categories->rowCount()>0){
+                foreach($categories as $category){
+        ?>
+        <a href="index.php?category=<?php echo $category['id'] ?>" class="list-group-item list-group-item-action"><?php echo $category['title'] ?></a>
+        <?php
+                }
+            }
+        ?>
     </div>
 
 
     <div class="card bg-light mb-3 p-3">
         <div class="card-body">
+            <?php
+                if(isset($_POST['subscribe'])){
+                    if(trim($_POST['name'])!="" && trim($_POST['email'])!=""){
+                        $name=$_POST['name'];
+                        $email=$_POST['email'];
+
+                        $subscribe_insert=$db->prepare('INSERT INTO `subscribers`(`name`, `email`) VALUES (:name,:email)');
+                        $subscribe_insert->execute(['name'=>$name,'email'=>$email]);
+                    }else{
+                        echo "فیلدها نباید خالی باشد";
+                    }
+                }
+            ?>
             <form method="post">
                 <div class="form-group">
-                    <label for="name">نام</label>
+                    <label for="name">نام و نام خانوادگی</label>
                     <input type="text" name="name" id="name" class="form-control" placeholder="نام خود را وارد کنید.">
 
                 </div>
