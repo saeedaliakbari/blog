@@ -1,4 +1,11 @@
+<?php
+include("config.php");
+include("db.php");
 
+$query="SELECT * FROM `categories`";
+$categories=$db->query($query);
+
+?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
@@ -21,9 +28,21 @@
             </button>
             <div id="my-nav" class="collapse navbar-collapse">
                 <ul class="navbar-nav order-md-1">
-                    <li class="nav-item"><a class="nav-link" href="">دسته 1</a> </li>
-                    <li class="nav-item"><a class="nav-link" href="">دسته 2</a></li>
-                    <li class="nav-item"><a class="nav-link" href="">دسته 3</a></li>
+                    <?php
+                        if($categories->rowCount()>0){
+                            foreach($categories as $category){
+                    ?>
+                   
+                        <li class="nav-item  <?php echo (isset($_GET['category'])&& $category['id']==$_GET['category'])?"active":"" ?> ">
+                            <a class="nav-link" href="index.php?category=<?php echo $category['id'] ?>">
+                            <?php echo $category['title'] ?> 
+                            </a> 
+                        </li>
+                    <?php
+                            }
+                        }
+                    ?>
+                    
                 </ul>
             </div>
         </div>
