@@ -49,7 +49,11 @@ $categories=$db->query($query_categories);
                         $subscribe_insert=$db->prepare('INSERT INTO `subscribers`(`name`, `email`) VALUES (:name,:email)');
                         $subscribe_insert->execute(['name'=>$name,'email'=>$email]);
                     }else{
-                        echo "فیلدها نباید خالی باشد";
+            ?>
+                        <div class="alert alert-danger">
+                            فیلد ها نباید خالی باشد    
+                        </div>
+            <?php
                     }
                 }
             ?>
