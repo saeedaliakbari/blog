@@ -108,7 +108,7 @@ if (isset($_POST['post_comment'])) {
 
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
-                                                    <!-- <img src="./img/boy.svg" width="70" height="70" class="rounded-circle" alt="Cinque Terre"> -->
+                                                    <img src="./img/boy.svg" width="70" height="70" class="rounded-circle" alt="Cinque Terre">
 
                                                     <div class="mr-3">
                                                         <h5 class="card-title"> <?php echo $comment['name'] ?> </h5>
