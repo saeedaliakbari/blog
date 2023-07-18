@@ -1,10 +1,9 @@
 <?php
-$query_categories="SELECT * FROM `categories`";
-$categories=$db->query($query_categories);
+$query_categories = "SELECT * FROM `categories`";
+$categories = $db->query($query_categories);
 ?>
 
 <div class="col-md-4 mb-3">
-
     <div class="card bg-light mb-3">
         <div class="card-body">
             <h5 class="card-title">جستجو در وبلاگ</h5>
@@ -27,13 +26,13 @@ $categories=$db->query($query_categories);
             دسته بندی ها
         </a>
         <?php
-            if($categories->rowCount()>0){
-                foreach($categories as $category){
+        if ($categories->rowCount() > 0) {
+            foreach ($categories as $category) {
         ?>
-        <a href="index.php?category=<?php echo $category['id'] ?>" class="list-group-item list-group-item-action"><?php echo $category['title'] ?></a>
+                <a href="index.php?category=<?php echo $category['id'] ?>" class="list-group-item list-group-item-action"><?php echo $category['title'] ?></a>
         <?php
-                }
             }
+        }
         ?>
     </div>
 
@@ -41,21 +40,21 @@ $categories=$db->query($query_categories);
     <div class="card bg-light mb-3 p-3">
         <div class="card-body">
             <?php
-                if(isset($_POST['subscribe'])){
-                    if(trim($_POST['name'])!="" && trim($_POST['email'])!=""){
-                        $name=$_POST['name'];
-                        $email=$_POST['email'];
+            if (isset($_POST['subscribe'])) {
+                if (trim($_POST['name']) != "" && trim($_POST['email']) != "") {
+                    $name = $_POST['name'];
+                    $email = $_POST['email'];
 
-                        $subscribe_insert=$db->prepare('INSERT INTO `subscribers`(`name`, `email`) VALUES (:name,:email)');
-                        $subscribe_insert->execute(['name'=>$name,'email'=>$email]);
-                    }else{
+                    $subscribe_insert = $db->prepare('INSERT INTO `subscribers`(`name`, `email`) VALUES (:name,:email)');
+                    $subscribe_insert->execute(['name' => $name, 'email' => $email]);
+                } else {
             ?>
-                        <div class="alert alert-danger">
-                            فیلد ها نباید خالی باشد    
-                        </div>
+                    <div class="alert alert-danger">
+                        فیلد ها نباید خالی باشد
+                    </div>
             <?php
-                    }
                 }
+            }
             ?>
             <form method="post">
                 <div class="form-group">
@@ -65,7 +64,7 @@ $categories=$db->query($query_categories);
                 </div>
                 <div class="form-group">
                     <label for="email">ایمیل</label>
-                    <input type="email" name="email" class="form-control" id="email"placeholder="ایمیل خود را وارد کنید.">
+                    <input type="email" name="email" class="form-control" id="email" placeholder="ایمیل خود را وارد کنید.">
                 </div>
 
                 <button type="submit" name="subscribe" class="btn btn-outline-primary btn-block">عضویت در خبرنامه</button>
